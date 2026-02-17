@@ -1,26 +1,66 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
+@theme {
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+
+  --color-background: #0a0a0a;
+  --color-foreground: #ededed;
+  --color-primary: #6c47ff;
+  --color-primary-hover: #5835e5;
+  --color-card: #141414;
+  --color-card-foreground: #ffffff;
+  --color-border: #262626;
+  --color-accent: #a855f7;
+  --color-muted: #737373;
+  --color-muted-foreground: #a3a3a3;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+:root {
+  --background: #0a0a0a;
+  --foreground: #ededed;
+  --primary: #6c47ff;
+  --primary-hover: #5835e5;
+  --card: #141414;
+  --card-foreground: #ffffff;
+  --border: #262626;
+  --accent: #a855f7;
+  --muted: #737373;
+  --muted-foreground: #a3a3a3;
+}
+
+@layer base {
+  body {
+    background-color: var(--background);
+    color: var(--foreground);
+    font-family: var(--font-sans);
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@layer components {
+  .glass {
+    background: rgba(20, 20, 20, 0.7);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .gradient-text {
+    background: linear-gradient(135deg, #6c47ff 0%, #a855f7 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .gradient-border {
+    border: 1px solid;
+    border-image: linear-gradient(135deg, #6c47ff 0%, #a855f7 100%) 1;
+  }
+
+  .btn-primary {
+    @apply bg-primary text-white px-6 py-3 rounded-xl font-semibold transition-all hover:bg-primary-hover hover:scale-105 active:scale-95;
+  }
+
+  .btn-secondary {
+    @apply bg-card text-white border border-border px-6 py-3 rounded-xl font-semibold transition-all hover:bg-border hover:scale-105 active:scale-95;
+  }
 }
