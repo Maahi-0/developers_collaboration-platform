@@ -105,3 +105,36 @@ export async function getProjectData(projectId) {
         return { success: false, error: error.message };
     }
 }
+
+export async function getAllUserTasks() {
+    try {
+        const { userId } = await auth();
+        if (!userId) throw new Error('Unauthorized');
+
+        // Get projects user is member of
+        const { data: projects, error: projectsError } = await supabaseAdmin
+            .from('project_members')
+            .select('project_id')
+            .eq('user_id', userId);
+
+        if (projectsError) throw projectsError;
+        const projectIds = projects.map(p => p.project_id);
+
+        if (projectIds.length === 0) return { success: true, tasks: [] };
+
+        const { data: tasks, error: tasksError } = await supabaseAdmin
+            .from('tasks')
+            .select(`
+                *,
+                projects(name)
+            `)
+            .in('project_id', projectIds);
+
+        if (tasksError) throw tasksError;
+
+        return { success: true, tasks };
+    } catch (error) {
+        console.error('Error fetching all tasks:', error);
+        return { success: false, error: error.message };
+    }
+}

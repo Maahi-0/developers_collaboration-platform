@@ -11,12 +11,14 @@ export async function createProject(formData) {
 
         const name = formData.get('name');
         const description = formData.get('description');
+        const repo_url = formData.get('repo_url');
 
         const { data: project, error: projectError } = await supabaseAdmin
             .from('projects')
             .insert({
                 name,
                 description,
+                repo_url,
                 owner_id: userId
             })
             .select()

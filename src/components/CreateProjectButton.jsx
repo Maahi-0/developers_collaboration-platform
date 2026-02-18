@@ -36,58 +36,70 @@ export default function CreateProjectButton({ primary }) {
             </button>
 
             {isOpen && (
-                <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-in fade-in duration-200">
-                    <div className="w-full max-w-md bg-card border border-border rounded-3xl p-8 shadow-2xl animate-in zoom-in-95 duration-200">
-                        <div className="flex items-center justify-between mb-8">
-                            <h2 className="text-2xl font-bold">Create Project</h2>
+                <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-background/80 backdrop-blur-sm animate-in fade-in duration-200">
+                    <div className="w-full max-w-md bg-white border border-border rounded-2xl p-10 shadow-2xl animate-in zoom-in-95 duration-200">
+                        <div className="flex items-center justify-between mb-10">
+                            <h2 className="hero-heading text-3xl">New Project</h2>
                             <button
                                 onClick={() => setIsOpen(false)}
-                                className="p-2 hover:bg-white/5 rounded-full transition-colors text-muted-foreground hover:text-white"
+                                className="p-2 hover:bg-muted rounded-full transition-colors text-muted-foreground hover:text-foreground"
                             >
-                                <X size={20} />
+                                <X size={18} />
                             </button>
                         </div>
 
-                        <form onSubmit={handleSubmit} className="space-y-6">
+                        <form onSubmit={handleSubmit} className="space-y-8">
                             <div>
-                                <label className="block text-sm font-semibold mb-2 text-muted-foreground uppercase tracking-wider">
+                                <label className="block text-[10px] font-bold mb-3 text-muted-foreground uppercase tracking-widest">
                                     Project Name
                                 </label>
                                 <input
                                     name="name"
                                     type="text"
                                     required
-                                    placeholder="e.g. NextGen Web Platform"
-                                    className="w-full bg-black/50 border border-border rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all"
+                                    placeholder="Enter project name..."
+                                    className="w-full bg-muted/30 border border-border rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-primary/10 focus:border-primary transition-all text-sm font-medium"
                                 />
                             </div>
 
                             <div>
-                                <label className="block text-sm font-semibold mb-2 text-muted-foreground uppercase tracking-wider">
-                                    Description (Optional)
+                                <label className="block text-[10px] font-bold mb-3 text-muted-foreground uppercase tracking-widest">
+                                    Description
                                 </label>
                                 <textarea
                                     name="description"
                                     rows="3"
-                                    placeholder="Describe your project goals..."
-                                    className="w-full bg-black/50 border border-border rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all resize-none"
+                                    placeholder="What is this project about?"
+                                    className="w-full bg-muted/30 border border-border rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-primary/10 focus:border-primary transition-all resize-none text-sm font-medium"
                                 ></textarea>
                             </div>
 
-                            <div className="flex gap-4 pt-2">
+                            <div>
+                                <label className="block text-[10px] font-bold mb-3 text-muted-foreground uppercase tracking-widest">
+                                    Repository URL (GitHub/GitLab)
+                                </label>
+                                <input
+                                    name="repo_url"
+                                    type="url"
+                                    placeholder="https://github.com/username/repo"
+                                    className="w-full bg-muted/30 border border-border rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-primary/10 focus:border-primary transition-all text-sm font-medium"
+                                />
+                            </div>
+
+                            <div className="flex gap-4 pt-4">
                                 <button
                                     type="button"
                                     onClick={() => setIsOpen(false)}
-                                    className="flex-1 px-6 py-3 rounded-xl border border-border font-semibold hover:bg-white/5 transition-colors"
+                                    className="flex-1 px-6 py-3 rounded-full border border-border text-sm font-bold uppercase tracking-widest text-muted-foreground hover:bg-muted transition-colors transition-all"
                                 >
                                     Cancel
                                 </button>
                                 <button
                                     type="submit"
                                     disabled={loading}
-                                    className="flex-1 btn-primary disabled:opacity-50 disabled:cursor-not-allowed"
+                                    className="flex-1 btn-primary disabled:opacity-50 disabled:cursor-not-allowed shadow-md"
                                 >
-                                    {loading ? "Creating..." : "Create Project"}
+                                    {loading ? "Creating..." : "Create"}
                                 </button>
                             </div>
                         </form>

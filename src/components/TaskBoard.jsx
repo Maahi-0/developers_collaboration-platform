@@ -6,8 +6,8 @@ import { updateTaskStatus } from "@/app/actions/tasks";
 
 const COLUMNS = [
     { id: "todo", title: "To Do", color: "bg-muted" },
-    { id: "in-progress", title: "In Progress", color: "bg-blue-500" },
-    { id: "done", title: "Done", color: "bg-green-500" },
+    { id: "in-progress", title: "In Progress", color: "bg-amber-400" },
+    { id: "done", title: "Done", color: "bg-emerald-500" },
 ];
 
 export default function TaskBoard({ project }) {
@@ -39,16 +39,16 @@ export default function TaskBoard({ project }) {
                 >
                     <div className="flex items-center justify-between mb-6 px-2">
                         <div className="flex items-center gap-3">
-                            <div className={`w-2 h-2 rounded-full ${column.color}`}></div>
-                            <h3 className="font-bold text-sm uppercase tracking-wider text-muted-foreground">
+                            <div className={`w-1.5 h-1.5 rounded-full ${column.color}`}></div>
+                            <h3 className="font-bold text-[10px] uppercase tracking-widest text-muted-foreground opacity-70">
                                 {column.title}
                             </h3>
                             <span className="bg-muted px-2 py-0.5 rounded text-[10px] font-bold text-muted-foreground">
                                 {tasksByStatus(column.id).length}
                             </span>
                         </div>
-                        <button className="text-muted-foreground hover:text-white transition-colors">
-                            <MoreVertical size={16} />
+                        <button className="text-muted-foreground hover:text-foreground transition-colors">
+                            <MoreVertical size={14} />
                         </button>
                     </div>
 
@@ -59,44 +59,44 @@ export default function TaskBoard({ project }) {
                                 draggable
                                 onDragStart={() => setMovingTaskId(task.id)}
                                 onDragEnd={() => setMovingTaskId(null)}
-                                className="bg-card border border-border p-4 rounded-xl shadow-sm hover:shadow-md hover:border-primary/50 transition-all cursor-grab active:cursor-grabbing group"
+                                className="bg-white border border-border p-5 rounded-xl shadow-sm hover:shadow-md hover:border-primary/20 transition-all cursor-grab active:cursor-grabbing group"
                             >
-                                <div className="flex items-start justify-between mb-3">
-                                    <span className={`text-[10px] font-bold uppercase tracking-tighter px-2 py-0.5 rounded ${task.priority === 'high' ? 'bg-red-500/10 text-red-500' :
-                                            task.priority === 'medium' ? 'bg-yellow-500/10 text-yellow-500' :
-                                                'bg-blue-500/10 text-blue-500'
+                                <div className="flex items-start justify-between mb-4">
+                                    <span className={`text-[9px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-sm border ${task.priority === 'high' ? 'bg-red-50 text-red-600 border-red-100' :
+                                        task.priority === 'medium' ? 'bg-amber-50 text-amber-600 border-amber-100' :
+                                            'bg-blue-50 text-blue-600 border-blue-100'
                                         }`}>
                                         {task.priority}
                                     </span>
-                                    <GripVertical size={14} className="text-muted-foreground opacity-0 group-hover:opacity-100 transition-opacity" />
+                                    <GripVertical size={14} className="text-muted-foreground opacity-0 group-hover:opacity-40 transition-opacity" />
                                 </div>
 
-                                <h4 className="font-semibold mb-2 group-hover:text-primary transition-colors">{task.title}</h4>
+                                <h4 className="font-medium text-sm mb-2 group-hover:text-primary transition-colors leading-snug">{task.title}</h4>
 
                                 {task.description && (
-                                    <p className="text-sm text-muted-foreground line-clamp-2 mb-4">
+                                    <p className="text-xs text-muted-foreground font-light italic line-clamp-2 mb-4 leading-relaxed">
                                         {task.description}
                                     </p>
                                 )}
 
-                                <div className="flex items-center justify-between mt-4 pt-4 border-t border-border/50">
+                                <div className="flex items-center justify-between mt-5 pt-4 border-t border-border/40">
                                     <div className="flex items-center gap-3">
-                                        <div className="flex items-center gap-1 text-[10px] text-muted-foreground font-medium">
-                                            <Clock size={12} />
+                                        <div className="flex items-center gap-1.5 text-[10px] text-muted-foreground font-bold uppercase tracking-widest opacity-60">
+                                            <Clock size={11} strokeWidth={2.5} />
                                             {new Date(task.created_at).toLocaleDateString()}
                                         </div>
                                     </div>
                                     <div className="flex items-center gap-2">
-                                        <button className="p-1 hover:bg-white/5 rounded text-muted-foreground transition-colors">
-                                            <MessageSquare size={14} />
+                                        <button className="p-1 hover:bg-muted rounded text-muted-foreground transition-colors">
+                                            <MessageSquare size={13} strokeWidth={1.5} />
                                         </button>
                                     </div>
                                 </div>
                             </div>
                         ))}
 
-                        <button className="w-full py-3 border border-dashed border-border rounded-xl text-sm text-muted-foreground hover:text-white hover:border-primary/50 hover:bg-primary/5 transition-all flex items-center justify-center gap-2 group">
-                            <Plus size={16} className="group-hover:scale-110 transition-transform" />
+                        <button className="w-full py-4 border border-dashed border-border rounded-xl text-[10px] font-bold uppercase tracking-widest text-muted-foreground/60 hover:text-primary hover:border-primary/30 hover:bg-primary/5 transition-all flex items-center justify-center gap-2 group">
+                            <Plus size={14} className="group-hover:scale-110 transition-transform" />
                             Add Task
                         </button>
                     </div>
